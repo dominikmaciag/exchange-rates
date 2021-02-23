@@ -1,7 +1,8 @@
 // global variables
 const checkLatestCurrencyBtn = document.querySelector(".check-currency");
-const latestCurrencyList = document.querySelector(".latest-currency-list");
 const currenciesList = document.querySelector(".currencies");
+const backButton = document.querySelector(".back-currency-btn");
+const latestCurrencyList = document.querySelector(".latest-currency-list");
 const dataURL = "https://api.exchangeratesapi.io/latest?base=PLN";
 var dateNow = formatDate(Date.now());
 var dateMonday = formatDate(lastMonday());
@@ -232,11 +233,16 @@ function formatDate(date) {
   return [year, month, day].join('-');
 }
 
-
+function removeWindow() {
+  checkLatestCurrencyBtn.classList.remove("open");
+  backButton.classList.remove("open");
+  const clearCurrency = document.querySelector(".close-list").innerHTML = '';
+}
 
 // historical example currency
 function checkLatestCurrencyBtnClick(event) {
   checkLatestCurrencyBtn.classList.toggle("open");
+  backButton.classList.toggle("open");
   const currencyAbbr = event.currentTarget.id;
   const getCurrencyHistoryUrl = (currency) => `https://api.exchangeratesapi.io/history?start_at=${dateMonday}&end_at=${dateNow}&base=PLN`;
 
